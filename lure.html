@@ -1,0 +1,150 @@
+
+<!doctype html>
+<head>
+  <meta charset = "utf-8">
+</head>
+
+<body>
+<div class="content">
+  <section id="main1"class="scrollTo">
+  <div>
+  <a>
+  <img src="img/page1.png" style="width: 100%; height: 100%;">
+  </a>
+  </div>
+  </section>
+
+  <section id="main1"class="scrollTo">
+  <div>
+  <a><img src="img/page2.gif" style="width: 100%; height: 100%;">
+  </a>
+  </div>
+  </section>
+
+  <section id="main1"class="scrollTo">
+  <div>
+  <a><img src="img/page3.gif" style="width: 100%; height: auto;">
+  </a>
+  </div>
+  </section>
+
+  <section id="main4"class="scrollTo">
+  <div>
+  <a>
+  <img src="img/page4.gif" style="width: 100%; height: auto;">
+  </a>
+  </div>
+  </section>
+
+  <section id="main5"class="scrollTo">
+  <div>
+  <a>
+  <img src="img/page5.gif" style="width: 100%; height: auto;">
+  </a>
+  </div>
+  </section>
+
+  <section id="main6"class="scrollTo">
+  <div>
+  <a>
+  <img src="img/page6.gif" style="width: 100%; height: auto;">
+  </a>
+  </div>
+  </section>
+
+  <section id="main7"class="scrollTo">
+  <div>
+  <a>
+  <img src="img/page7.gif" style="width: 100%; height: auto;">
+  </a>
+  </div>
+  </section> 
+
+  <section id="main8"class="scrollTo">
+  <div>
+  <a href="index2.html#main8-2" target="_self">
+  <img src="img/page8.gif" style="width: 100%; height: auto;">
+  </a>
+  </div>
+  </section> 
+
+  <section id="main9"class="scrollTo">
+  <div>
+  <a>
+  <img src="img/page9.gif" style="width: 100%; height: auto;">
+  </a>
+  </div>
+  </section>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var scrolling = false;
+var currentPos = 0;
+
+    function scrollUp(){
+        if(!scrolling && currentPos > 0 ){
+            scrolling=true;
+            currentPos --;
+            var scrollToElement = $('.scrollTo')[currentPos];
+
+            $('html, body').animate({
+                scrollTop: $(scrollToElement).offset().top
+            }, 500, function(){
+                scrolling = false;
+            });      
+        }
+    }   
+
+    function scrollDown(){   
+        if(!scrolling && currentPos < $('.scrollTo').length-1  ){
+            scrolling=true;
+            currentPos ++;
+            var scrollToElement = $('.scrollTo')[currentPos];
+
+            $('html, body').animate({
+                scrollTop: $(scrollToElement).offset().top
+            }, 500,function(){
+                scrolling = false;
+            }); 
+        }
+    }    
+
+    $(document).ready(function() {
+
+
+        for( var i = 0; i < $('.scrollTo').length; i++){
+            var elm = $('.scrollTo')[i];
+
+            if( $(document).scrollTop() >= $(elm).offset().top ){
+                currentPos = i;
+            }
+        }
+
+        $(document).bind('DOMMouseScroll', function(e){
+            if(e.originalEvent.detail > 0) {
+                scrollDown();
+            }else {
+                scrollUp();   
+            }
+            return false;
+        });
+
+        $(document).bind('mousewheel', function(e){
+            if(e.originalEvent.wheelDelta < 0) {
+                scrollDown();
+            }else {
+                scrollUp();     
+            }
+            return false;
+        });
+    });
+</script>
+</body>
+<style>
+html, body { margin: 0; padding: 0; width: 100%; height: 100%;}
+.content { width: 100%; height: 100%; }
+.content > section { width: 100%; height: 100%; }
+
+</style>
+
